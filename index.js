@@ -6,6 +6,9 @@ const flash = require('connect-flash');
 const config = require('config-lite')(__dirname);
 const routes = require('./routes');
 const pkg = require('./package');
+const winston = require('winston');
+const expressWinston = require('express-winston');
+
 
 const app = express();
 
@@ -53,13 +56,43 @@ app.use(function (req, res, next) {
   res.locals.error = req.flash('error').toString();
   next();
 });
-
-
-routes(app);
 //之后可以在模版中直接使用这几个变量， 而不用在render的时候传入变量
 //app.local为静态数据 res.local为变量数据
 
+app.use(expressWinston.logger({
+  transports: [
+    new(winston.transports.Console)({
+      json:true,
+      colorize:true
+    }),
+    new winston.transports.File({
+      filename: 'logs/success.log'
+    })
+  ]
+}));
+
+routes(app);
+
+app.use(expressWinston.errorLogger({
+  transports: [
+    new winston.transports.Console({
+      json: true,
+      colorize: true
+    }),
+    new winston.transports.File({
+      filename: 'logs/error.log'
+    })
+  ]
+}));
+
+
 // 处理表单及文件上传的中间件
+
+app.use(function (err, req, res, next) {
+  console.error(err);
+  req.flash('error', err.message);
+  res.redirect('/posts');
+});
 
 app.listen(config.port, function(){
   console.log(`${pkg.name} listening on port number ${config.port}`);
