@@ -94,6 +94,10 @@ app.use(function (err, req, res, next) {
   res.redirect('/posts');
 });
 
-app.listen(config.port, function(){
-  console.log(`${pkg.name} listening on port number ${config.port}`);
-});
+if(module.parent) {
+  module.export = app;
+}else{
+  app.listen(config.port, function(){
+    console.log(`${pkg.name} listening on port number ${config.port}`);
+  });
+}

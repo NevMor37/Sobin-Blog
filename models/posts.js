@@ -6,10 +6,10 @@ Posts.plugin('addCommentsCount', {
   afterFind: function (posts) {
     return Promise.all(posts.map(function (post) {
       return CommentModel.getCommentsCount(post._id).then(function (commentsCount) {
-        post.commentsCount = commentsCount
-        return post
-      })
-    }))
+        post.commentsCount = commentsCount;
+        return post;
+      });
+    }));
   },
   afterFindOne: function (post) {
     if (post) {

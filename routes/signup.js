@@ -43,7 +43,7 @@ router.post('/', checkNotLogin, function(req, res, next){
   }catch(e){
     fs.unlink(req.files.avatar.path);
     req.flash('error', e.message);
-    return res.redirect('/signup')
+    return res.redirect('/signup');
   }
   password = sha1(password);
 
