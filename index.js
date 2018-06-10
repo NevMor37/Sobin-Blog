@@ -97,7 +97,10 @@ app.use(function (err, req, res, next) {
 if(module.parent) {
   module.export = app;
 }else{
-  app.listen(config.port, function(){
+ const PORT = process.env.PORT || config.port;
+
+
+  app.listen(PORT, function(){
     console.log(`${pkg.name} listening on port number ${config.port}`);
   });
 }

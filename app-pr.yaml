@@ -1,0 +1,9 @@
+runtime: nodejs
+env: flex
+service: mybabesnotebook-pr
+
+
+env_variables:
+  LCP: "PR"
+  MONGODB_URI: "mongodb://myblog:myblog1@ds016058.mlab.com:16058/myblog"
+
