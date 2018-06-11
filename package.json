@@ -1,7 +1,7 @@
 {
-  "name": "myblog",
+  "name": "myBlog",
   "version": "1.0.0",
-  "description": "a simple blog",
+  "description": "a simple message board",
   "main": "index.js",
   "scripts": {
     "test": "mocha test",
