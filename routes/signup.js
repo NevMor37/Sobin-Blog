@@ -22,23 +22,23 @@ router.post('/', checkNotLogin, function(req, res, next){
   const repassword = req.fields.repassword;
 
   try{
-    if (!(name.length >= 1 && name.length <= 10)) {
-      throw new Error('名字请限制在 1-10 个字符')
+    if (!(name.length >= 1 && name.length <= 20)) {
+      throw new Error('Please restric user name to 1-20 characters')
     }
     if (['m', 'f', 'x'].indexOf(gender) === -1) {
-      throw new Error('性别只能是 m、f 或 x')
+      throw new Error('You can only set gender to male, female or unknown =.=')
     }
     if (!(bio.length >= 1 && bio.length <= 30)) {
-      throw new Error('个人简介请限制在 1-30 个字符')
+      throw new Error('Bio length from 1 to 30 characters')
     }
     if (!req.files.avatar.name) {
-      throw new Error('缺少头像')
+      throw new Error('I need an icon of you!')
     }
     if (password.length < 6) {
-      throw new Error('密码至少 6 个字符')
+      throw new Error('Password is going to be more than 6 characters long~')
     }
     if (password !== repassword) {
-      throw new Error('两次输入密码不一致')
+      throw new Error('Not consistant for password two-time input~')
     }
   }catch(e){
     fs.unlink(req.files.avatar.path);
