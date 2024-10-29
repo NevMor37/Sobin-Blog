@@ -13,7 +13,7 @@ describe('signup', function () {
       // 创建一个用户
       User.create({
         name: testName1,
-        password: '1234567',
+        password: '12345678',
         avatar: '',
         gender: 'x',
         bio: ''
